@@ -8,20 +8,24 @@
  * node qrcodemaker1.js
  * B型二维码，{'scene':'162','page':'xmain/biker','width':430} 参数名字只能为scene
  * node qrcodemaker2.js
- * C型二维码，{'path':'xmain/evcar?chgid=100120','width':430} 参数名可变，统一取名为chgid
- *
- * 生成的图片文件给到小牛公司，我公司会将二维码与设备一同组装出厂出货。
- * 重要提示：生成二维码以后请在充电小程序电桩详情页（充电页）点击右上解扫码按钮扫码一次。
+ * C型二维码，{'path':'xmain/evcar?chgid=100120','width':430} 参数名可变，统一取名即可
  */
 const fs = require('fs');
 const request = require('request');
-const wxappid = ''; //你的微信小程序APPID
-const wxappsecret = ''; //你的微信小程序APPSECRET
+const wxappid = 'wx03de48e13d5561b3'; //你的微信小程序APPID
+const wxappsecret = '0c3561938d16e51986beb38531a84367'; //你的微信小程序APPSECRET
 const savepath = __dirname + '/output/'; //输出图片的保存位置
-const arr = [
-  { round: 1, zoneNum: 1 },
-  { round: 2, zoneNum: 1 }
-];
+
+const arr = []
+for (let index = 0; index < 16; index++) {
+  for (let i = 0; i < 2; i++) {
+    const tempObj = {};
+    tempObj.round = i+1;
+    tempObj.zoneNum = index+1;
+    arr.push(tempObj)
+  }
+}
+
 const index = 0;
 const wxapi_qrcreate = 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=';
 const wxapi_credial = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=';
