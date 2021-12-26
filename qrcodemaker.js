@@ -45,6 +45,7 @@ let downloadqrcode = function () {
 let downloadimage = function (arr, index) {
   let round = arr[index].round;
   let zoneNum = arr[index].zoneNum;
+  //postbody.page需要根据round去变
   postbody.scene = `round=${round}&zoneNum=${zoneNum}`;
   console.log(`postbody.scene:`, postbody.scene)
   options.body = postbody;
